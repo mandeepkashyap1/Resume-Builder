@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg sticky-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html">ResumeBuilder</a>
+        <div class="d-flex gap-2">
+          <button id="themeToggle" class="btn btn-outline-secondary btn-sm rounded-pill">🌙 Dark Mode</button>
+          <a href="preview.html" class="btn btn-primary btn-sm rounded-pill">Preview</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container py-4">
+      <div class="row g-4">
+        <div class="col-lg-8">
+          <div class="section-card p-4 rounded-4 shadow-sm fade-up">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <div>
+                <h2 class="fw-bold mb-1">Build Your Resume</h2>
+                <p class="text-muted mb-0">Fill in your details and preview the result instantly.</p>
+              </div>
+              <a href="preview.html" class="btn btn-primary rounded-pill">Preview Resume</a>
+            </div>
+
+            <form id="resumeForm">
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <h5 class="fw-bold mb-3">Personal Information</h5>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label" for="fullName">Full Name</label>
+                      <input id="fullName" class="form-control" type="text" placeholder="Enter your full name" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="title">Professional Title</label>
+                      <input id="title" class="form-control" type="text" placeholder="e.g. Software Engineer" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="photoInput">Profile Photo</label>
+                      <input id="photoInput" class="form-control" type="file" accept="image/*" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="phone">Phone Number</label>
+                      <input id="phone" class="form-control" type="tel" placeholder="e.g. +91 9876543210" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="email">Email</label>
+                      <input id="email" class="form-control" type="email" placeholder="you@example.com" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="address">Address</label>
+                      <input id="address" class="form-control" type="text" placeholder="City, State" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="linkedin">LinkedIn</label>
+                      <input id="linkedin" class="form-control" type="text" placeholder="linkedin.com/in/username" />
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="github">GitHub</label>
+                      <input id="github" class="form-control" type="text" placeholder="github.com/username" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Professional Summary</h5>
+                    <span id="summaryCounter" class="text-muted small">0/300</span>
+                  </div>
+                  <textarea id="summary" class="form-control" rows="4" maxlength="300" placeholder="Write a concise professional summary"></textarea>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Education</h5>
+                    <button type="button" id="addEducation" class="btn btn-outline-primary btn-sm rounded-pill">+ Add More</button>
+                  </div>
+                  <div id="educationList"></div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <h5 class="fw-bold mb-3">Skills</h5>
+                  <div class="row g-3 mb-3">
+                    <div class="col-md-6">
+                      <label class="form-label">Technical Skills</label>
+                      <div class="input-group">
+                        <input id="technicalSkillInput" class="form-control" type="text" placeholder="e.g. JavaScript" />
+                        <button type="button" id="addTechnicalSkill" class="btn btn-primary">Add</button>
+                      </div>
+                      <div id="technicalSkillTags" class="tag-list mt-2"></div>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label">Soft Skills</label>
+                      <div class="input-group">
+                        <input id="softSkillInput" class="form-control" type="text" placeholder="e.g. Leadership" />
+                        <button type="button" id="addSoftSkill" class="btn btn-primary">Add</button>
+                      </div>
+                      <div id="softSkillTags" class="tag-list mt-2"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Projects</h5>
+                    <button type="button" id="addProject" class="btn btn-outline-primary btn-sm rounded-pill">+ Add More</button>
+                  </div>
+                  <div id="projectList"></div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Work Experience</h5>
+                    <button type="button" id="addExperience" class="btn btn-outline-primary btn-sm rounded-pill">+ Add More</button>
+                  </div>
+                  <div id="experienceList"></div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <h5 class="fw-bold mb-3">Certifications</h5>
+                  <div class="row g-3">
+                    <div class="col-md-4">
+                      <label class="form-label" for="certName">Certificate Name</label>
+                      <input id="certName" class="form-control" type="text" placeholder="e.g. AWS Cloud Practitioner" />
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="certOrg">Issuing Organization</label>
+                      <input id="certOrg" class="form-control" type="text" placeholder="e.g. Amazon Web Services" />
+                    </div>
+                    <div class="col-md-4">
+                      <label class="form-label" for="certDate">Completion Date</label>
+                      <input id="certDate" class="form-control" type="date" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <h5 class="fw-bold mb-3">Achievements</h5>
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label class="form-label" for="awards">Awards</label>
+                      <textarea id="awards" class="form-control" rows="2" placeholder="List awards and recognitions"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="hackathons">Hackathons</label>
+                      <textarea id="hackathons" class="form-control" rows="2" placeholder="Mention hackathon participation"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="competitions">Competitions</label>
+                      <textarea id="competitions" class="form-control" rows="2" placeholder="Mention competitions and results"></textarea>
+                    </div>
+                    <div class="col-md-6">
+                      <label class="form-label" for="olympiads">Olympiads</label>
+                      <textarea id="olympiads" class="form-control" rows="2" placeholder="Mention olympiad achievements"></textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Languages</h5>
+                    <button type="button" id="addLanguage" class="btn btn-outline-primary btn-sm rounded-pill">+ Add</button>
+                  </div>
+                  <div id="languageList"></div>
+                </div>
+              </div>
+
+              <div class="card border-0 shadow-sm mb-4">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="fw-bold mb-0">Hobbies</h5>
+                    <div class="input-group hobby-input-group">
+                      <input id="hobbyInput" class="form-control" type="text" placeholder="Add hobby" />
+                      <button type="button" id="addHobby" class="btn btn-primary">Add</button>
+                    </div>
+                  </div>
+                  <div id="hobbyTags" class="tag-list"></div>
+                </div>
+              </div>
+
+              <div class="d-flex flex-wrap gap-2">
+                <button type="button" id="savePreviewBtn" class="btn btn-primary rounded-pill px-4">Save & Preview</button>
+                <button type="button" id="downloadBtn" class="btn btn-outline-secondary rounded-pill px-4">Download PDF</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="position-sticky top-0 sidebar-stack">
+            <div class="section-card p-4 rounded-4 shadow-sm mb-3 fade-up">
+              <h5 class="fw-bold mb-3">Progress Tracker</h5>
+              <div class="progress mb-2 progress-compact">
+                <div id="progressBar" class="progress-bar bg-success progress-fill"></div>
+              </div>
+              <p id="progressText" class="small text-muted mb-0">0% complete</p>
+            </div>
+
+            <div class="section-card p-4 rounded-4 shadow-sm mb-3 fade-up">
+              <h5 class="fw-bold mb-3">ATS Score</h5>
+              <div class="d-flex align-items-center gap-3 mb-2">
+                <div id="atsScore" class="display-6 fw-bold text-success">0/100</div>
+                <span class="badge bg-success-subtle text-success">ATS Ready</span>
+              </div>
+              <div id="atsSuggestions" class="small text-muted"></div>
+            </div>
+
+            <div class="section-card p-4 rounded-4 shadow-sm fade-up">
+              <h5 class="fw-bold mb-3">Quick Tips</h5>
+              <ul class="small text-muted mb-0 ps-3">
+                <li>Add measurable achievements.</li>
+                <li>Include relevant keywords for your domain.</li>
+                <li>Keep the summary concise and targeted.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script/form.js"></script>
+  </body>
+</html>
